@@ -67,7 +67,7 @@ For example:
 
 For example:
 
-![]()
+![](wx20221003-002124-2x.png)
 
 it is not good if the denominator or numerator is zero. To avoid this problem, we will use smoothings. 
 
