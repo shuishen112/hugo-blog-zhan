@@ -42,6 +42,8 @@ $$
 $$
 {{< /math >}}
 
+
+
 let $x_1, x_2, x_3,...,x_n$ be tokens in a sentence. and $P(x_1, x_2, x_3,...,x_n)$ be the probability of these tokens. Using the product rule of probability (the chain rule), we get the statistic language model:
 
 $$P(x*1, x_2, x_3,...,x_n) = P(x_1)P(x_2|x_1)P(x_3|x_2,x_1)...P(x_n|x_1,...,x*{n-1})$$
