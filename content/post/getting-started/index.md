@@ -37,12 +37,9 @@ language modeling is to assign a probability to a sentence. Formally, in natural
 ## Statistic language model
 
 {{< math >}}
-
 $$
-f(k;p*{0}^{*}) = \begin{cases}p*{0}^{*} & \text{if }k=1, \
-1-p_{0}^{*} & \text{if }k=0.\end{cases}
+\gamma*{n} = \frac{ \left | \left (\mathbf x*{n} - \mathbf x*{n-1} \right )^T \left [\nabla F (\mathbf x*{n}) - \nabla F (\mathbf x*{n-1}) \right ] \right |}{\left |\nabla F(\mathbf{x}*{n}) - \nabla F(\mathbf{x}_{n-1}) \right |^2}
 $$
-
 {{< /math >}}
 
 let $x_1, x_2, x_3,...,x_n$ be tokens in a sentence. and $P(x_1, x_2, x_3,...,x_n)$ be the probability of these tokens. Using the product rule of probability (the chain rule), we get the statistic language model:
