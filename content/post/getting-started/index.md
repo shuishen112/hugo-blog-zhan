@@ -1,106 +1,156 @@
 ---
-title: Welcome to Wowchemy, the website builder for Hugo
-subtitle: Welcome 👋 We know that first impressions are important, so we've populated your new site with some initial content to help you get familiar with everything in no time.
-
-# Summary for listings and search engines
-summary: Welcome 👋 We know that first impressions are important, so we've populated your new site with some initial content to help you get familiar with everything in no time.
-
-# Link this post with a project
-projects: []
-
-# Date published
-date: '2020-12-13T00:00:00Z'
-
-# Date updated
-lastmod: '2020-12-13T00:00:00Z'
-
-# Is this an unpublished draft?
+title: Language modeling
+subtitle: ""
+date: 2020-12-13T00:00:00Z
+summary: Welcome 👋 We know that first impressions are important, so we've
+  populated your new site with some initial content to help you get familiar
+  with everything in no time.
 draft: false
-
-# Show this page in the Featured widget?
 featured: false
-
-# Featured image
-# Place an image named `featured.jpg/png` in this page's folder and customize its options here.
-image:
-  caption: 'Image credit: [**Unsplash**](https://unsplash.com/photos/CpkOjOcXdUY)'
-  focal_point: ''
-  placement: 2
-  preview_only: false
-
 authors:
   - admin
   - 美杨
-
+lastmod: 2020-12-13T00:00:00Z
 tags:
   - Academic
   - 开源
-
 categories:
   - Demo
   - 教程
+projects: []
+image:
+  caption: "Image credit: [**Unsplash**](https://unsplash.com/photos/CpkOjOcXdUY)"
+  focal_point: ""
+  placement: 2
+  preview_only: false
 ---
+* introduce the Language modeling
+* CNN and RNN langauge modeling introducition
+* code implemention
 
-## Overview
+  > https://lena-voita.github.io/nlp_course/language_modeling.html
 
-1. The Wowchemy website builder for Hugo, along with its starter templates, is designed for professional creators, educators, and teams/organizations - although it can be used to create any kind of site
-2. The template can be modified and customised to suit your needs. It's a good platform for anyone looking to take control of their data and online identity whilst having the convenience to start off with a **no-code solution (write in Markdown and customize with YAML parameters)** and having **flexibility to later add even deeper personalization with HTML and CSS**
-3. You can work with all your favourite tools and apps with hundreds of plugins and integrations to speed up your workflows, interact with your readers, and much more
+# language modeling
 
-[![The template is mobile first with a responsive design to ensure that your site looks stunning on every device.](https://raw.githubusercontent.com/wowchemy/wowchemy-hugo-modules/main/starters/academic/preview.png)](https://wowchemy.com)
+language modeling is to assign a probability to a sentence. Formally, in natural language processing, language aims to construct an efficient approximation to the probability measure on the set of expressions in the language learned from a sampling data set. 
 
+## Statistic language model
 
-## Get Started
+let $x_1, x_2, x_3,...,x_n$ be tokens in a sentence. and $P(x_1, x_2, x_3,...,x_n)$ be the probability of these tokens. Using the product rule of probability (the chain rule), we get the statistic language model:
 
-- 👉 [**Create a new site**](https://wowchemy.com/hugo-themes/)
-- 📚 [**Personalize your site**](https://wowchemy.com/docs/)
-- 💬 [Chat with the **Wowchemy community**](https://discord.gg/z8wNYzb) or [**Hugo community**](https://discourse.gohugo.io)
-- 🐦 Twitter: [@wowchemy](https://twitter.com/wowchemy) [@GeorgeCushen](https://twitter.com/GeorgeCushen) [#MadeWithWowchemy](https://twitter.com/search?q=%23MadeWithWowchemy&src=typed_query)
-- 💡 [Request a **feature** or report a **bug** for _Wowchemy_](https://github.com/wowchemy/wowchemy-hugo-themes/issues)
-- ⬆️ **Updating Wowchemy?** View the [Update Guide](https://wowchemy.com/docs/hugo-tutorials/update/) and [Release Notes](https://github.com/wowchemy/wowchemy-hugo-themes/releases)
+$$P(x*1, x_2, x_3,...,x_n) = P(x_1)P(x_2|x_1)P(x_3|x_2,x_1)...P(x_n|x_1,...,x*{n-1})$$
 
-## Crowd-funded open-source software
+We docomposed the probability of a text into conditional probabilities of each token given the previous context. So we got a left-to-right language model. 
 
-To help us develop this template and software sustainably under the MIT license, we ask all individuals and businesses that use it to help support its ongoing maintenance and development via sponsorship.
+## N-gram langauge model
 
-### [❤️ Click here to become a sponsor and help support Wowchemy's future ❤️](https://github.com/sponsors/gcushen)
+But how we compute the probability $P(x*t|x_1,...,x*{n-1})$. So we need to introduce the **Markov property** and **smoothings**
+The straighforward way to compute the $P(x*t|x_1,...,x*{n-1})$ is:
 
-As a token of appreciation for sponsoring, you can **unlock [these](https://wowchemy.com/sponsor/) awesome rewards and extra features 🦄✨**
+$P(x*t|x_1,...,x*{t-1}) = \frac{N(x*1,x_2,...,x_t)}{N(x_1,x_2,...,x*{t-1})}$. 
 
-## Ecosystem
+Usually, it doesn't work well because $x_1,x_2,...,x_t$ do not occur in a corpus and therefore, will zero out the probability of the sentence. 
 
-- **[Hugo Academic CLI](https://github.com/wowchemy/hugo-academic-cli):** Automatically import publications from BibTeX
+### Markov property
 
-## Inspiration
+To address the above problem, we need to make a independence assumption:
 
-[Check out the latest **demo**](https://hugo-blog-theme.netlify.app/) of what you'll get in less than 10 minutes, or [view the **showcase**](https://wowchemy.com/creators/) of personal, project, and business sites.
+**The probability of a word only depends on a fixed number of previous words**
 
-## Features
+For example:
 
-- **Page builder** - Create _anything_ with [**widgets**](https://wowchemy.com/docs/page-builder/) and [**elements**](https://wowchemy.com/docs/writing-markdown-latex/)
-- **Edit any type of content** - Blog posts, publications, talks, slides, projects, and more!
-- **Create content** in [**Markdown**](https://wowchemy.com/docs/writing-markdown-latex/), [**Jupyter**](https://wowchemy.com/docs/import/jupyter/), or [**RStudio**](https://wowchemy.com/docs/install-locally/)
-- **Plugin System** - Fully customizable [**color** and **font themes**](https://wowchemy.com/docs/customization/)
-- **Display Code and Math** - Code highlighting and [LaTeX math](https://en.wikibooks.org/wiki/LaTeX/Mathematics) supported
-- **Integrations** - [Google Analytics](https://analytics.google.com), [Disqus commenting](https://disqus.com), Maps, Contact Forms, and more!
-- **Beautiful Site** - Simple and refreshing one page design
-- **Industry-Leading SEO** - Help get your website found on search engines and social media
-- **Media Galleries** - Display your images and videos with captions in a customizable gallery
-- **Mobile Friendly** - Look amazing on every screen with a mobile friendly version of your site
-- **Multi-language** - 34+ language packs including English, 中文, and Português
-- **Multi-user** - Each author gets their own profile page
-- **Privacy Pack** - Assists with GDPR
-- **Stand Out** - Bring your site to life with animation, parallax backgrounds, and scroll effects
-- **One-Click Deployment** - No servers. No databases. Only files.
+* n=3(trigram model): $P(x*t|x_1,x_2,...,x*{t-1}) = P(x*t|x*{t-1},x_{t-2})$
+* n=2(bigram model): $P(x*t|x_1,x_2,...,x*{t-1}) = P(x*t|x*{t-1})$
+* n=1(unigram model): $P(x*t|x_1,x_2,...,x*{t-1}) = P(x_t)$
 
-## Themes
+### Smoothing
 
-Wowchemy and its templates come with **automatic day (light) and night (dark) mode** built-in. Alternatively, visitors can choose their preferred mode - click the moon icon in the top right of the [Demo](https://academic-demo.netlify.com/) to see it in action! Day/night mode can also be disabled by the site admin in `params.toml`.
+For example:
 
-[Choose a stunning **theme** and **font**](https://wowchemy.com/docs/customization) for your site. Themes are fully customizable.
+![]()
 
-## License
+it is not good if the denominator or numerator is zero. To avoid this problem, we will use smoothings. 
 
-Copyright 2016-present [George Cushen](https://georgecushen.com).
+#### avoid zeros in the denomiantor
 
-Released under the [MIT](https://github.com/wowchemy/wowchemy-hugo-themes/blob/master/LICENSE.md) license.
+* one of the method is to use less context. This is called **backoff** ![5e5957ee7fd992bcad4c43a43de6a324.png](evernotecid://6459BACF-694D-457B-9112-921BE0B0D75B/appyinxiangcom/24822188/ENResource/p287)
+* More clever:![5b8568a66c788bd071e59ea87cdf1dd4.png](evernotecid://6459BACF-694D-457B-9112-921BE0B0D75B/appyinxiangcom/24822188/ENResource/p289)
+
+#### aovid zeros in numerator
+
+![55c1b860a5eeae9d5c97c64c22bec6d9.png](evernotecid://6459BACF-694D-457B-9112-921BE0B0D75B/appyinxiangcom/24822188/ENResource/p290)
+![937b31dc610df675d17b334d112176c1.png](evernotecid://6459BACF-694D-457B-9112-921BE0B0D75B/appyinxiangcom/24822188/ENResource/p292)
+
+## Neural based language model
+
+**The inability to use long context is the main shortcoming of n-gram language model**
+
+In our general left-to-right languaage modeling framework, the probability of a token sentence is:
+
+$$P(x*1,x_2,...,x_n) = P(x_1)P(x_2|x_1)P(x_3|x_1,x_2).....P(x_n,|x_1,...,x*{n-1})=\prod\limits_{t=1}^nP(x_t|x<t)$$
+
+Differenctly from n-gram models that define formulas based on global corpus statistics, neural models teach a network to predict these probabilities. 
+So we want to to use **neural network** to compute the conditional probability: $P(x*t|x_1,x_2,...,x*{t-1})$
+
+Actually, neural network models always to two things:
+
+* process context: 
+  The main idea here is to get representation for the previous context. Then the model predict the probability distribution for the next token. This model could be different depending on the model architecture. (RNN, CNN, what ever you want)
+* generate the probability distribution for the next token:
+  Once the text has been encoded, Usually the probability distribution is generated in the same way. we usually has an hidden-to-vocab projection in the final layer of neural netork. So we can think of neural language models as neural classifier. They classify prefix of text into $|V|$ class, where the classes are vocabulary tokens.
+
+We can think of of netural langauge models as neural classifiers. They classify prefix of text into $|V|$ classes, where the classes are vocabulary tokens. 
+
+## Hith-Level Pipeline:
+
+Since left-to-right netural languae models can be thought of as classifiers, the general pipeline is very similar to Text classification lecture. 
+
+For different architectures: the general pipeline is as follows:
+
+* feed word embedding for previous (context) words into a network
+* get vector representation of context from the network. 
+* from this vector representation, predict a probability distribution for the next token. 
+
+![01ae014e9dba71aaaa42e863e6ed93d6.png](evernotecid://6459BACF-694D-457B-9112-921BE0B0D75B/appyinxiangcom/24822188/ENResource/p295)
+
+similarly to neural classifiers, we can think about the classification part in a very simple way. 
+
+![d9bdbe4406d303b29ad0951451f914a4.png](evernotecid://6459BACF-694D-457B-9112-921BE0B0D75B/appyinxiangcom/24822188/ENResource/p296)
+
+vector representation of a text has some dimensionality d, but in the end, we need a vector size $|V|$. To get a $|V|$ size vector from $d$ sized, we can use a linear layer. and then apply the softmax operation to convert the raw numbers into class probabilities. 
+
+### Another view
+
+So we can treat the final layer as **Dot product with output word embeddings**
+
+![b403b69eeca7b31f617c46f6b5d6cc68.png](evernotecid://6459BACF-694D-457B-9112-921BE0B0D75B/appyinxiangcom/24822188/ENResource/p297)
+
+![3847efa8e6a7e024b7a42dad316e9f1d.png](evernotecid://6459BACF-694D-457B-9112-921BE0B0D75B/appyinxiangcom/24822188/ENResource/p301)
+
+Formally, if $h*t$ is the vector representation of the context $x_1,x_2,...,x*{t-1}$ and $e_w$ are the ouput embedding vectors, then:
+
+$$p(x*t|x_1,...,x*{t-1})= \frac{\exp(h*t^Te*{x*t})}{\sum*{w\in V}\exp(h_t^Te_w)}$$
+
+## Training and the cross-entropy loss
+
+Neural LMs are trained to predict a distribution of next token given the previous context. Intuitively, at each step we maxmize the probabilty a model assigns to the correct token. 
+
+Formally, if $x*1,...,x_n$ is a training token sequence, then at the timestep $t$ a model predicts a probability distribution $p^{(t)}=p(*|x_1,...,x*{t-1})$. The target at the step is $p^{(*)} = \text{one-hot}(x_t)$ is one-hot vector. we want a model to assign a probability 1 to the correct token y_t and zero the rest. 
+
+The standard loss function is cross-entrpy loss . Cross entropy loss for the target dribution $p^{*}$ and the predicted distribution $p$ is :
+
+$$Loss(p^{*}, p)=-p^{*}\log(p)=-\sum\limits_{i=1}^{|V|}p_i^{*}\log(p_i)$$
+
+Since only one of $p_i^{*}$ is no-zero (becuse of one-hot encoding), we will get :
+
+$$Loss(p^{*}, p)=-\log(p^{(x*t)}) = -\log(p(x_t|x_1,x_2,...,x*{t-1}))$$
+
+Look at the illustraction for a single timestep. 
+
+![88c60f33e6beedb625fde67e556c392b.png](evernotecid://6459BACF-694D-457B-9112-921BE0B0D75B/appyinxiangcom/24822188/ENResource/p303)
+
+### Cross-Entropy and KL divergence
+
+when the target distribution is oneh-hot $(p^{*})=\text{one-hot}(y_t)$, they cross-entroy loss $Loss(p^{*}, p)=-\sum\limits*{i=1}^{|V|}p^{*}\log(p_i)$ is equivalent to Kullback-Leibler divergence $D*{KL}(p^{*}||p)$
+
+Therefore, the standard NN-LM optimization can be thought of as trying to minimize the distance (although, formally KL is not a valid distance metric) between the model prediction distribution $p$ and empirical target distribution $p^{*}$. With many training examples, this is close to minimizing the distance to the actual target distribution.
