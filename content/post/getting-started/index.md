@@ -38,7 +38,12 @@ language modeling is to assign a probability to a sentence. Formally, in natural
 
 let $x_1, x_2, x_3,...,x_n$ be tokens in a sentence. and $P(x_1, x_2, x_3,...,x_n)$ be the probability of these tokens. Using the product rule of probability (the chain rule), we get the statistic language model:
 
+{{< math >}}
+
+
 $$P(x*1, x_2, x_3,...,x_n) = P(x_1)P(x_2|x_1)P(x_3|x_2,x_1)...P(x_n|x_1,...,x*{n-1})$$
+
+{{< /math >}}
 
 We docomposed the probability of a text into conditional probabilities of each token given the previous context. So we got a left-to-right language model. 
 
