@@ -4,9 +4,9 @@ date: 2019-07-12
 math: true
 image:
   placement: 2
-  caption: 'Image credit: [**John Moeses Bauan**](https://unsplash.com/photos/OGZtQF8iC0g)'
+  caption: "Image credit: [**John Moeses
+    Bauan**](https://unsplash.com/photos/OGZtQF8iC0g)"
 ---
-
 Wowchemy is designed to give technical content creators a seamless experience. You can focus on the content and Wowchemy handles the rest.
 
 **Highlight your code snippets, take notes on math classes, and draw diagrams from textual representation.**
@@ -19,11 +19,13 @@ On this page, you'll find some examples of the types of technical content that c
 
 Wowchemy supports a Markdown extension for highlighting code syntax. You can customize the styles under the `syntax_highlighter` option in your `config/_default/params.yaml` file.
 
-    ```python
-    import pandas as pd
-    data = pd.read_csv("data.csv")
-    data.head()
-    ```
+````
+```python
+import pandas as pd
+data = pd.read_csv("data.csv")
+data.head()
+```
+````
 
 renders as
 
@@ -57,7 +59,7 @@ A simple mindmap defined as a Markdown list:
 
 renders as
 
-```markmap {height="200px"}
+```markmap
 - Hugo Modules
   - wowchemy
   - wowchemy-plugins-netlify
@@ -95,7 +97,7 @@ A more advanced mindmap with formatting, code blocks, and math:
 
 renders as
 
-```markmap
+````markmap
 - Mindmaps
   - Links
     - [Wowchemy Docs](https://wowchemy.com/docs/)
@@ -113,7 +115,7 @@ renders as
       console.log('code block');
       ```
     - Math: $x = {-b \pm \sqrt{b^2-4ac} \over 2a}$
-```
+````
 
 ### Charts
 
@@ -131,7 +133,7 @@ You might also find the [Plotly JSON Editor](http://plotly-json-editor.getforge.
 
 Wowchemy supports a Markdown extension for $\LaTeX$ math. You can enable this feature by toggling the `math` option in your `config/_default/params.yaml` file.
 
-To render _inline_ or _block_ math, wrap your LaTeX math with `{{</* math */>}}$...${{</* /math */>}}` or `{{</* math */>}}$$...$${{</* /math */>}}`, respectively. (We wrap the LaTeX math in the Wowchemy _math_ shortcode to prevent Hugo rendering our math as Markdown. The _math_ shortcode is new in v5.5-dev.)
+To render *inline* or *block* math, wrap your LaTeX math with `{{</* math */>}}$...${{</* /math */>}}` or `{{</* math */>}}$$...$${{</* /math */>}}`, respectively. (We wrap the LaTeX math in the Wowchemy *math* shortcode to prevent Hugo rendering our math as Markdown. The *math* shortcode is new in v5.5-dev.)
 
 Example **math block**:
 
@@ -146,8 +148,14 @@ $$
 renders as
 
 {{< math >}}
-$$\gamma_{n} = \frac{ \left | \left (\mathbf x_{n} - \mathbf x_{n-1} \right )^T \left [\nabla F (\mathbf x_{n}) - \nabla F (\mathbf x_{n-1}) \right ] \right |}{\left \|\nabla F(\mathbf{x}_{n}) - \nabla F(\mathbf{x}_{n-1}) \right \|^2}$$
+$$\gamma*{n} = \frac{ \left | \left (\mathbf x*{n} - \mathbf x*{n-1} \right )^T \left [\nabla F (\mathbf x*{n}) - \nabla F (\mathbf x*{n-1}) \right ] \right |}{\left |\nabla F(\mathbf{x}*{n}) - \nabla F(\mathbf{x}_{n-1}) \right |^2}$$
 {{< /math >}}
+
+
+
+{{< math >}}
+$a + b$
+{{< /math >}
 
 Example **inline math** `{{</* math */>}}$\nabla F(\mathbf{x}_{n})${{</* /math */>}}` renders as {{< math >}}$\nabla F(\mathbf{x}_{n})${{< /math >}}.
 
@@ -165,7 +173,7 @@ renders as
 {{< math >}}
 
 $$
-f(k;p_{0}^{*}) = \begin{cases}p_{0}^{*} & \text{if }k=1, \\
+f(k;p*{0}^{*}) = \begin{cases}p*{0}^{*} & \text{if }k=1, \
 1-p_{0}^{*} & \text{if }k=0.\end{cases}
 $$
 
@@ -177,13 +185,15 @@ Wowchemy supports a Markdown extension for diagrams. You can enable this feature
 
 An example **flowchart**:
 
-    ```mermaid
-    graph TD
-    A[Hard] -->|Text| B(Round)
-    B --> C{Decision}
-    C -->|One| D[Result 1]
-    C -->|Two| E[Result 2]
-    ```
+````
+```mermaid
+graph TD
+A[Hard] -->|Text| B(Round)
+B --> C{Decision}
+C -->|One| D[Result 1]
+C -->|Two| E[Result 2]
+```
+````
 
 renders as
 
@@ -197,17 +207,19 @@ C -->|Two| E[Result 2]
 
 An example **sequence diagram**:
 
-    ```mermaid
-    sequenceDiagram
-    Alice->>John: Hello John, how are you?
-    loop Healthcheck
-        John->>John: Fight against hypochondria
-    end
-    Note right of John: Rational thoughts!
-    John-->>Alice: Great!
-    John->>Bob: How about you?
-    Bob-->>John: Jolly good!
-    ```
+````
+```mermaid
+sequenceDiagram
+Alice->>John: Hello John, how are you?
+loop Healthcheck
+    John->>John: Fight against hypochondria
+end
+Note right of John: Rational thoughts!
+John-->>Alice: Great!
+John->>Bob: How about you?
+Bob-->>John: Jolly good!
+```
+````
 
 renders as
 
@@ -225,16 +237,18 @@ Bob-->>John: Jolly good!
 
 An example **Gantt diagram**:
 
-    ```mermaid
-    gantt
-    section Section
-    Completed :done,    des1, 2014-01-06,2014-01-08
-    Active        :active,  des2, 2014-01-07, 3d
-    Parallel 1   :         des3, after des1, 1d
-    Parallel 2   :         des4, after des1, 1d
-    Parallel 3   :         des5, after des3, 1d
-    Parallel 4   :         des6, after des4, 1d
-    ```
+````
+```mermaid
+gantt
+section Section
+Completed :done,    des1, 2014-01-06,2014-01-08
+Active        :active,  des2, 2014-01-07, 3d
+Parallel 1   :         des3, after des1, 1d
+Parallel 2   :         des4, after des1, 1d
+Parallel 3   :         des5, after des3, 1d
+Parallel 4   :         des6, after des4, 1d
+```
+````
 
 renders as
 
@@ -251,22 +265,24 @@ Parallel 4   :         des6, after des4, 1d
 
 An example **class diagram**:
 
-    ```mermaid
-    classDiagram
-    Class01 <|-- AveryLongClass : Cool
-    Class03 *-- Class04
-    Class05 o-- Class06
-    Class07 .. Class08
-    Class09 --> C2 : Where am i?
-    Class09 --* C3
-    Class09 --|> Class07
-    Class07 : equals()
-    Class07 : Object[] elementData
-    Class01 : size()
-    Class01 : int chimp
-    Class01 : int gorilla
-    Class08 <--> C2: Cool label
-    ```
+````
+```mermaid
+classDiagram
+Class01 <|-- AveryLongClass : Cool
+Class03 *-- Class04
+Class05 o-- Class06
+Class07 .. Class08
+Class09 --> C2 : Where am i?
+Class09 --* C3
+Class09 --|> Class07
+Class07 : equals()
+Class07 : Object[] elementData
+Class01 : size()
+Class01 : int chimp
+Class01 : int gorilla
+Class08 <--> C2: Cool label
+```
+````
 
 renders as
 
@@ -289,15 +305,17 @@ Class08 <--> C2: Cool label
 
 An example **state diagram**:
 
-    ```mermaid
-    stateDiagram
-    [*] --> Still
-    Still --> [*]
-    Still --> Moving
-    Moving --> Still
-    Moving --> Crash
-    Crash --> [*]
-    ```
+````
+```mermaid
+stateDiagram
+[*] --> Still
+Still --> [*]
+Still --> Moving
+Moving --> Still
+Moving --> Crash
+Crash --> [*]
+```
+````
 
 renders as
 
@@ -323,13 +341,14 @@ You can even write your todo lists in Markdown too:
 
 renders as
 
-- [x] Write math example
-  - [x] Write diagram example
-- [ ] Do something else
+* Write math example
+
+  * Write diagram example
+* Do something else
 
 ### Tables
 
-Save your spreadsheet as a CSV file in your page's folder and then render it by adding the _Table_ shortcode to your page:
+Save your spreadsheet as a CSV file in your page's folder and then render it by adding the *Table* shortcode to your page:
 
 ```go
 {{</* table path="results.csv" header="true" caption="Table 1: My results" */>}}
@@ -341,7 +360,7 @@ renders as
 
 ### Callouts
 
-Academic supports a [shortcode for callouts](https://wowchemy.com/docs/content/writing-markdown-latex/#callouts), also referred to as _asides_, _hints_, or _alerts_. By wrapping a paragraph in `{{%/* callout note */%}} ... {{%/* /callout */%}}`, it will render as an aside.
+Academic supports a [shortcode for callouts](https://wowchemy.com/docs/content/writing-markdown-latex/#callouts), also referred to as *asides*, *hints*, or *alerts*. By wrapping a paragraph in `{{%/* callout note */%}} ... {{%/* /callout */%}}`, it will render as an aside.
 
 ```markdown
 {{%/* callout note */%}}
@@ -371,7 +390,7 @@ renders as
 
 ### Icons
 
-Academic enables you to use a wide range of [icons from _Font Awesome_ and _Academicons_](https://wowchemy.com/docs/getting-started/page-builder/#icons) in addition to [emojis](https://wowchemy.com/docs/content/writing-markdown-latex/#emojis).
+Academic enables you to use a wide range of [icons from *Font Awesome* and *Academicons*](https://wowchemy.com/docs/getting-started/page-builder/#icons) in addition to [emojis](https://wowchemy.com/docs/content/writing-markdown-latex/#emojis).
 
 Here are some examples using the `icon` shortcode to render icons:
 
@@ -383,8 +402,8 @@ Here are some examples using the `icon` shortcode to render icons:
 
 renders as
 
-{{< icon name="terminal" pack="fas" >}} Terminal  
-{{< icon name="python" pack="fab" >}} Python  
+{{< icon name="terminal" pack="fas" >}} Terminal\
+{{< icon name="python" pack="fab" >}} Python\
 {{< icon name="r-project" pack="fab" >}} R
 
 ### Did you find this page helpful? Consider sharing it 🙌
