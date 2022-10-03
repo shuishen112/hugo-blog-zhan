@@ -48,12 +48,12 @@ We docomposed the probability of a text into conditional probabilities of each t
 
 ## N-gram langauge model
 
-But how we compute the probability {{< math >}}$P(x_t*\|x\_1,...,x\_*{n-1})${{< /math >}}. So we need to introduce the **Markov property** and **smoothings**
-The straighforward way to compute the {{< math >}}$P(x_*t|x\_1,...,x\_*{n-1})${{< /math >}} is:
+But how we compute the probability $P(x_t|x_1,...,x_{n-1})$. So we need to introduce the **Markov property** and **smoothings**
+The straighforward way to compute the {{< math >}}$P(x_t|x_1,...,x_{n-1})${{< /math >}} is:
 
 {{< math >}}
 
-$P(x_*t|x\_1,...,x\_*{t-1}) = \frac{N(x_*1,x_2,...,x_t)}{N(x_1,x\_2,...,x\_*{t-1})}$. 
+$P(x_t|x_1,...,x_{t-1}) = \frac{N(x_1,x_2,...,x_t)}{N(x_1,x\_2,...,x_{t-1})}$. 
 
 {{< /math >}}
 
@@ -67,11 +67,11 @@ To address the above problem, we need to make a independence assumption:
 
 For example:
 
-\- n=3(trigram model): {{< math >}}$P(x_*t|x_1,x\_2,...,x\_{t-1}) = P(x\_t|x\_{t-1},x_*{t-2})${{< /math >}}
+- n=3(trigram model): {{< math >}}$P(x_t|x_1,x_2,...,x_{t-1}) = P(x_t|x_{t-1},x_{t-2})${{< /math >}}
 
-\- n=2(bigram model): $P(x_t|x_1,x\_2,...,x\_{t-1}) = P(x\_t|x\_{t-1})$
+- n=2(bigram model): $P(x_t|x_1,x_2,...,x_{t-1}) = P(x_t|x_{t-1})$
 
-\- n=1(unigram model): $P(x_t|x_1,x\_2,...,x\_{t-1}) = P(x_t)$
+- n=1(unigram model): $P(x_t|x_1,x_2,...,x_{t-1}) = P(x_t)$
 
 ### Smoothing
 
@@ -101,10 +101,10 @@ it is not good if the denominator or numerator is zero. To avoid this problem, w
 
 In our general left-to-right languaage modeling framework, the probability of a token sentence is:
 
-$$P(x*1,x_2,...,x_n) = P(x_1)P(x_2|x_1)P(x_3|x_1,x_2).....P(x_n,|x_1,...,x*{n-1})=\prod\limits_{t=1}^nP(x_t|x<t)$$
+$$P(x_1,x_2,...,x_n) = P(x_1)P(x_2|x_1)P(x_3|x_1,x_2).....P(x_n,|x_1,...,x_{n-1})=\prod\limits_{t=1}^nP(x_t|x<t)$$
 
 Differenctly from n-gram models that define formulas based on global corpus statistics, neural models teach a network to predict these probabilities. 
-So we want to to use **neural network** to compute the conditional probability: $P(x*t|x_1,x_2,...,x*{t-1})$
+So we want to to use **neural network** to compute the conditional probability: $P(x_t|x_1,x_2,...,x_{t-1})$
 
 Actually, neural network models always to two things:
 
@@ -141,15 +141,15 @@ So we can treat the final layer as **Dot product with output word embeddings**
 
 ![3847efa8e6a7e024b7a42dad316e9f1d.png](evernotecid://6459BACF-694D-457B-9112-921BE0B0D75B/appyinxiangcom/24822188/ENResource/p301)
 
-Formally, if $h*t$ is the vector representation of the context $x_1,x_2,...,x*{t-1}$ and $e_w$ are the ouput embedding vectors, then:
+Formally, if $h_t$ is the vector representation of the context $x_1,x_2,...,x_{t-1}$ and $e_w$ are the ouput embedding vectors, then:
 
-$$p(x*t|x_1,...,x*{t-1})= \frac{\exp(h*t^Te*{x*t})}{\sum*{w\in V}\exp(h_t^Te_w)}$$
+$$p(x_t|x_1,...,x_{t-1})= \frac{\exp(h_t^Te_{x_t})}{\sum_{w\in V}\exp(h_t^Te_w)}$$
 
 ## Training and the cross-entropy loss
 
 Neural LMs are trained to predict a distribution of next token given the previous context. Intuitively, at each step we maxmize the probabilty a model assigns to the correct token. 
 
-Formally, if $x*1,...,x_n$ is a training token sequence, then at the timestep $t$ a model predicts a probability distribution $p^{(t)}=p(*|x_1,...,x*{t-1})$. The target at the step is $p^{(*)} = \text{one-hot}(x_t)$ is one-hot vector. we want a model to assign a probability 1 to the correct token y_t and zero the rest. 
+Formally, if $x_1,...,x_n$ is a training token sequence, then at the timestep $t$ a model predicts a probability distribution $p^{(t)}=p(*|x_1,...,x_{t-1})$. The target at the step is $p^{(*)} = \text{one-hot}(x_t)$ is one-hot vector. we want a model to assign a probability 1 to the correct token y_t and zero the rest. 
 
 The standard loss function is cross-entrpy loss . Cross entropy loss for the target dribution $p^{*}$ and the predicted distribution $p$ is :
 
@@ -157,7 +157,7 @@ $$Loss(p^{*}, p)=-p^{*}\log(p)=-\sum\limits_{i=1}^{|V|}p_i^{*}\log(p_i)$$
 
 Since only one of $p_i^{*}$ is no-zero (becuse of one-hot encoding), we will get :
 
-$$Loss(p^{*}, p)=-\log(p^{(x*t)}) = -\log(p(x_t|x_1,x_2,...,x*{t-1}))$$
+$$Loss(p^{*}, p)=-\log(p^{(x_t)}) = -\log(p(x_t|x_1,x_2,...,x_{t-1}))$$
 
 Look at the illustraction for a single timestep. 
 
