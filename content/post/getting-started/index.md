@@ -48,12 +48,12 @@ We docomposed the probability of a text into conditional probabilities of each t
 
 ## N-gram langauge model
 
-But how we compute the probability $P(x_*t|x_1,...,x*{n-1})$. So we need to introduce the **Markov property** and **smoothings**
-The straighforward way to compute the $P(x*t|x_1,...,x*{n-1})$ is:
+But how we compute the probability $P(x_*t|x\_1,...,x\_*{n-1})$. So we need to introduce the **Markov property** and **smoothings**
+The straighforward way to compute the $P(x_*t|x_1,...,x*{n-1})$ is:
 
 {{< math >}}
 
-$P(x*t|x_1,...,x*{t-1}) = \frac{N(x*1,x_2,...,x_t)}{N(x_1,x_2,...,x*{t-1})}$. 
+$P(x_*t|x_1,...,x*{t-1}) = \frac{N(x_*1,x_2,...,x_t)}{N(x_1,x\_2,...,x\_*{t-1})}$. 
 
 {{< /math >}}
 
@@ -67,7 +67,7 @@ To address the above problem, we need to make a independence assumption:
 
 For example:
 
-\- n=3(trigram model): $P(x_t|x_1,x\_2,...,x\_{t-1}) = P(x\_t|x\_{t-1},x_{t-2})$
+\- n=3(trigram model): $P(x_*t|x_1,x\_2,...,x\_{t-1}) = P(x\_t|x\_{t-1},x_*{t-2})$
 
 \- n=2(bigram model): $P(x_t|x_1,x\_2,...,x\_{t-1}) = P(x\_t|x\_{t-1})$
 
@@ -83,8 +83,12 @@ it is not good if the denominator or numerator is zero. To avoid this problem, w
 
 #### avoid zeros in the denomiantor
 
-* one of the method is to use less context. This is called **backoff** ![5e5957ee7fd992bcad4c43a43de6a324.png](evernotecid://6459BACF-694D-457B-9112-921BE0B0D75B/appyinxiangcom/24822188/ENResource/p287)
-* More clever:![5b8568a66c788bd071e59ea87cdf1dd4.png](evernotecid://6459BACF-694D-457B-9112-921BE0B0D75B/appyinxiangcom/24822188/ENResource/p289)
+* one of the method is to use less context. This is called **backoff** :
+
+  ![](wx20221003-103232.png)
+* More clever:
+
+  ![](wx20221003-103319.png)
 
 #### aovid zeros in numerator
 
