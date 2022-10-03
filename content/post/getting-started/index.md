@@ -165,6 +165,4 @@ Look at the illustraction for a single timestep.
 
 ### Cross-Entropy and KL divergence
 
-when the target distribution is oneh-hot $(p^{*})=\text{one-hot}(y_t)$, they cross-entroy loss $Loss(p^{*}, p)=-\sum\limits_{i=1}^{|V|}p^{*}\log(p_i)$ is equivalent to Kullback-Leibler divergence $D_{KL}(p^{*}||p)$
-
-Therefore, the standard NN-LM optimization can be thought of as trying to minimize the distance (although, formally KL is not a valid distance metric) between the model prediction distribution $p$ and empirical target distribution $p^{*}$. With many training examples, this is close to minimizing the distance to the actual target distribution.
+when the target distribution is one-hot, Therefore, the standard NN-LM optimization can be thought of as trying to minimize the distance (although, formally KL is not a valid distance metric) between the model prediction distribution $p$ and empirical target distribution $p^{*}$. With many training examples, this is close to minimizing the distance to the actual target distribution.
