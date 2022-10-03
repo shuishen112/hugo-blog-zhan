@@ -40,7 +40,6 @@ let $x_1, x_2, x_3,...,x_n$ be tokens in a sentence. and $P(x_1, x_2, x_3,...,x_
 
 {{< math >}}
 
-
 $$P(x*1, x_2, x_3,...,x_n) = P(x_1)P(x_2|x_1)P(x_3|x_2,x_1)...P(x_n|x_1,...,x*{n-1})$$
 
 {{< /math >}}
@@ -49,10 +48,14 @@ We docomposed the probability of a text into conditional probabilities of each t
 
 ## N-gram langauge model
 
-But how we compute the probability $P(x*t|x_1,...,x*{n-1})$. So we need to introduce the **Markov property** and **smoothings**
+But how we compute the probability $P(x_*t|x_1,...,x*{n-1})$. So we need to introduce the **Markov property** and **smoothings**
 The straighforward way to compute the $P(x*t|x_1,...,x*{n-1})$ is:
 
+{{< math >}}
+
 $P(x*t|x_1,...,x*{t-1}) = \frac{N(x*1,x_2,...,x_t)}{N(x_1,x_2,...,x*{t-1})}$. 
+
+{{< /math >}}
 
 Usually, it doesn't work well because $x_1,x_2,...,x_t$ do not occur in a corpus and therefore, will zero out the probability of the sentence. 
 
@@ -64,9 +67,11 @@ To address the above problem, we need to make a independence assumption:
 
 For example:
 
-* n=3(trigram model): $P(x*t|x_1,x_2,...,x*{t-1}) = P(x*t|x*{t-1},x_{t-2})$
-* n=2(bigram model): $P(x*t|x_1,x_2,...,x*{t-1}) = P(x*t|x*{t-1})$
-* n=1(unigram model): $P(x*t|x_1,x_2,...,x*{t-1}) = P(x_t)$
+\- n=3(trigram model): $P(x_t|x_1,x\_2,...,x\_{t-1}) = P(x\_t|x\_{t-1},x_{t-2})$
+
+\- n=2(bigram model): $P(x_t|x_1,x\_2,...,x\_{t-1}) = P(x\_t|x\_{t-1})$
+
+\- n=1(unigram model): $P(x_t|x_1,x\_2,...,x\_{t-1}) = P(x_t)$
 
 ### Smoothing
 
