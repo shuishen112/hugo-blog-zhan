@@ -152,9 +152,9 @@ Neural LMs are trained to predict a distribution of next token given the previou
 Formally, if $x_1,...,x_n$ is a training token sequence, then at the timestep $t$ a model predicts a probability distribution $p^{(t)}=p(\*|x_1,...,x_{t-1})$. The target at the step is $p^{(*)} = \text{one-hot}(x_t)$ is one-hot vector. we want a model to assign a probability 1 to the correct token y_t and zero the rest. 
 
 The standard loss function is cross-entrpy loss . Cross entropy loss for the target dribution $p^{*}$ and the predicted distribution $p$ is :
-
+{{< math >}}
 $$Loss(p^{*}, p)=-p^{*}\log(p)=-\sum\limits_{i=1}^{|V|}p_i^{*}\log(p_i)$$
-
+{{< /math >}}
 Since only one of $p_i^{*}$ is no-zero (becuse of one-hot encoding), we will get :
 
 $$Loss(p^{*}, p)=-\log(p^{(x_t)}) = -\log(p(x_t|x_1,x_2,...,x_{t-1}))$$
