@@ -149,7 +149,7 @@ $$p(x_t|x_1,...,x_{t-1})= \frac{\exp(h_t^Te_{x_t})}{\sum_{w\in V}\exp(h_t^Te_w)}
 
 Neural LMs are trained to predict a distribution of next token given the previous context. Intuitively, at each step we maxmize the probabilty a model assigns to the correct token. 
 
-Formally, if $x_1,...,x_n$ is a training token sequence, then at the timestep $t$ a model predicts a probability distribution $p^{(t)}=p(\*|x_1,...,x_{t-1})$. The target at the step is $p^{(*)} = \text{one-hot}(x_t)$ is one-hot vector. we want a model to assign a probability 1 to the correct token y_t and zero the rest. 
+Formally, if $x_1,...,x_n$ is a training token sequence, then at the timestep $t$ a model predicts a probability distribution $p^{(t)}=p(\*|x_1,...,x_{t-1})$. The target at the step is $p^{(*)} = \text{one-hot}(x_t)$ is one-hot vector. we want a model to assign a probability 1 to the correct token $y_t$ and zero the rest. 
 
 The standard loss function is cross-entrpy loss . Cross entropy loss for the target dribution $p^{*}$ and the predicted distribution $p$ is :
 
