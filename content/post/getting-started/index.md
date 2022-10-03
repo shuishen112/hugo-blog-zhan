@@ -149,7 +149,7 @@ $$p(x_t|x_1,...,x_{t-1})= \frac{\exp(h_t^Te_{x_t})}{\sum_{w\in V}\exp(h_t^Te_w)}
 
 Neural LMs are trained to predict a distribution of next token given the previous context. Intuitively, at each step we maxmize the probabilty a model assigns to the correct token. 
 
-Formally, if $x_1,...,x_n$ is a training token sequence, then at the timestep $t$ a model predicts a probability distribution $p^{(t)}=p(*|x_1,...,x_{t-1})$. The target at the step is $p^{(*)} = \text{one-hot}(x_t)$ is one-hot vector. we want a model to assign a probability 1 to the correct token y_t and zero the rest. 
+Formally, if $x_1,...,x_n$ is a training token sequence, then at the timestep $t$ a model predicts a probability distribution $p^{(t)}=p(\*|x_1,...,x_{t-1})$. The target at the step is $p^{(*)} = \text{one-hot}(x_t)$ is one-hot vector. we want a model to assign a probability 1 to the correct token y_t and zero the rest. 
 
 The standard loss function is cross-entrpy loss . Cross entropy loss for the target dribution $p^{*}$ and the predicted distribution $p$ is :
 
@@ -165,6 +165,6 @@ Look at the illustraction for a single timestep.
 
 ### Cross-Entropy and KL divergence
 
-when the target distribution is oneh-hot $(p^{*})=\text{one-hot}(y_t)$, they cross-entroy loss $Loss(p^{*}, p)=-\sum\limits*{i=1}^{|V|}p^{*}\log(p_i)$ is equivalent to Kullback-Leibler divergence $D*{KL}(p^{*}||p)$
+when the target distribution is oneh-hot $(p^{*})=\text{one-hot}(y_t)$, they cross-entroy loss $Loss(p^{*}, p)=-\sum\limits{i=1}^{|V|}p^{*}\log(p_i)$ is equivalent to Kullback-Leibler divergence $D_{KL}(p^{*}||p)$
 
 Therefore, the standard NN-LM optimization can be thought of as trying to minimize the distance (although, formally KL is not a valid distance metric) between the model prediction distribution $p$ and empirical target distribution $p^{*}$. With many training examples, this is close to minimizing the distance to the actual target distribution.
