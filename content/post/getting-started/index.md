@@ -40,7 +40,7 @@ let $x_1, x_2, x_3,...,x_n$ be tokens in a sentence. and $P(x_1, x_2, x_3,...,x_
 
 {{< math >}}
 
-$$P(x_*1, x_2, x_3,...,x_n) = P(x_1)P(x_2|x_1)P(x_3|x_2,x_1)...P(x_n|x\_1,...,x\_*{n-1})$$
+$$P(x_1, x_2, x_3,...,x_n) = P(x_1)P(x_2|x_1)P(x_3|x_2,x_1)...P(x_n|x\_1,...,x\_*{n-1})$$
 
 {{< /math >}}
 
@@ -165,6 +165,6 @@ Look at the illustraction for a single timestep.
 
 ### Cross-Entropy and KL divergence
 
-when the target distribution is oneh-hot $(p^{*})=\text{one-hot}(y_t)$, they cross-entroy loss $Loss(p^{*}, p)=-\sum\limits{i=1}^{|V|}p^{*}\log(p_i)$ is equivalent to Kullback-Leibler divergence $D_{KL}(p^{*}||p)$
+when the target distribution is oneh-hot $(p^{*})=\text{one-hot}(y_t)$, they cross-entroy loss $Loss(p^{*}, p)=-\sum\limits_{i=1}^{|V|}p^{*}\log(p_i)$ is equivalent to Kullback-Leibler divergence $D_{KL}(p^{*}||p)$
 
 Therefore, the standard NN-LM optimization can be thought of as trying to minimize the distance (although, formally KL is not a valid distance metric) between the model prediction distribution $p$ and empirical target distribution $p^{*}$. With many training examples, this is close to minimizing the distance to the actual target distribution.
