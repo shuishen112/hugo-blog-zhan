@@ -40,7 +40,7 @@ let $x_1, x_2, x_3,...,x_n$ be tokens in a sentence. and $P(x_1, x_2, x_3,...,x_
 
 {{< math >}}
 
-$$P(x*1, x_2, x_3,...,x_n) = P(x_1)P(x_2|x_1)P(x_3|x_2,x_1)...P(x_n|x_1,...,x*{n-1})$$
+$$P(x_*1, x_2, x_3,...,x_n) = P(x_1)P(x_2|x_1)P(x_3|x_2,x_1)...P(x_n|x\_1,...,x\_*{n-1})$$
 
 {{< /math >}}
 
@@ -48,12 +48,12 @@ We docomposed the probability of a text into conditional probabilities of each t
 
 ## N-gram langauge model
 
-But how we compute the probability $P(x_*t|x\_1,...,x\_*{n-1})$. So we need to introduce the **Markov property** and **smoothings**
-The straighforward way to compute the $P(x_*t|x_1,...,x*{n-1})$ is:
+But how we compute the probability {{< math >}}$P(x_t*\|x\_1,...,x\_*{n-1})${{< /math >}}. So we need to introduce the **Markov property** and **smoothings**
+The straighforward way to compute the {{< math >}}$P(x_*t|x\_1,...,x\_*{n-1})${{< /math >}} is:
 
 {{< math >}}
 
-$P(x_*t|x_1,...,x*{t-1}) = \frac{N(x_*1,x_2,...,x_t)}{N(x_1,x\_2,...,x\_*{t-1})}$. 
+$P(x_*t|x\_1,...,x\_*{t-1}) = \frac{N(x_*1,x_2,...,x_t)}{N(x_1,x\_2,...,x\_*{t-1})}$. 
 
 {{< /math >}}
 
@@ -67,7 +67,7 @@ To address the above problem, we need to make a independence assumption:
 
 For example:
 
-\- n=3(trigram model): $P(x_*t|x_1,x\_2,...,x\_{t-1}) = P(x\_t|x\_{t-1},x_*{t-2})$
+\- n=3(trigram model): {{< math >}}$P(x_*t|x_1,x\_2,...,x\_{t-1}) = P(x\_t|x\_{t-1},x_*{t-2})${{< /math >}}
 
 \- n=2(bigram model): $P(x_t|x_1,x\_2,...,x\_{t-1}) = P(x\_t|x\_{t-1})$
 
